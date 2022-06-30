@@ -12,8 +12,7 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size) {
   if (data == NULL || size <= 0) {
     return 0;
   }
-  std::string command = constructEchoCommand(data, size);
-  system(command.c_str());
+  system(constructEchoCommand(data, size).c_str());
   return 0;
 }
 
