@@ -3,9 +3,8 @@ extern "C" {
   #include <string.h>
 }
 
-void constructEchoCommand(const char *data, size_t size, char* command) {
-  std::string temp = std::string("echo ") + '"' + std::string(data, size) + '"';
-  strcpy(command, temp.c_str());
+std::string constructEchoCommand(const char *data, size_t size) {
+  return std::string("echo ") + '"' + std::string(data, size) + '"';
 }
 
 
@@ -13,10 +12,8 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size) {
   if (data == NULL || size <= 0) {
     return 0;
   }
-  // command = echo "data"\0
-  char* command = (char*) malloc(5 + 1 + size + 1 + 1);
-  constructEchoCommand(data, size, command);
-  system(command);
-  free(command);
+  std::string command = constructEchoCommand(data, size);
+  system(command.c_str());
   return 0;
 }
+
