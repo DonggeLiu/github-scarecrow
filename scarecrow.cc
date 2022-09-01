@@ -1,18 +1,9 @@
-#include <string>
-extern "C" {
-  #include <string.h>
-}
+#include <stdint.h>
+#include <stddef.h>
+#include <stdlib.h>
 
-std::string constructEchoCommand(const char *data, size_t size) {
-  return std::string("echo ") + '"' + std::string(data, size) + '"';
-}
-
-
-extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size) {
-  if (data == NULL || size <= 0) {
-    return 0;
-  }
-  system(constructEchoCommand(data, size).c_str());
+extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
+  char *s = (char *) malloc(size);
   return 0;
 }
 
