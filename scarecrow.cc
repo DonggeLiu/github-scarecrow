@@ -1,9 +1,9 @@
 #include <stdint.h>
 #include <stddef.h>
-#include <stdlib.h>
+#include <unistd.h>
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
-  char *s = (char *) malloc(size);
+  sleep(60);
   return 0;
 }
 
